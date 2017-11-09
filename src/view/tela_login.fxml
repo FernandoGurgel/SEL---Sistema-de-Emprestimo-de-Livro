@@ -32,20 +32,23 @@
                   <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Label fx:id="label_nome" text="Login">
+                  <Label fx:id="label" text="Login">
                      <font>
                         <Font name="Agency FB" size="22.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="txt_login" onKeyPressed="#onKeyboard" prefHeight="25.0" prefWidth="197.0" promptText="Login" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="1">
+                  <TextField fx:id="login" onKeyPressed="#onKeyboard" prefHeight="25.0" prefWidth="197.0" promptText="Login" style="-fx-background-color: #FFFFFF;" GridPane.rowIndex="1">
                      <effect>
                         <Reflection />
                      </effect>
+                     <font>
+                        <Font name="Agency FB" size="13.0" />
+                     </font>
                   </TextField>
-                  <PasswordField fx:id="txt_senha" onAction="#onButtonAction" onKeyPressed="#onKeyboard" style="-fx-background-color: #FFFFFF;" visible="false" GridPane.rowIndex="1" />
+                  <PasswordField fx:id="senha" onAction="#addEntrar" onKeyPressed="#onKeyboard" style="-fx-background-color: #FFFFFF;" visible="false" GridPane.rowIndex="1" />
                </children>
             </GridPane>
-            <Button fx:id="btn_entrar" layoutX="38.0" layoutY="272.0" mnemonicParsing="false" onAction="#onButtonAction" prefHeight="33.0" prefWidth="197.0" text="Próximo">
+            <Button fx:id="btnEntrar" layoutX="38.0" layoutY="272.0" mnemonicParsing="false" onAction="#addEntrar" prefHeight="33.0" prefWidth="197.0" text="Próximo">
                <font>
                   <Font name="Agency FB" size="17.0" />
                </font>
