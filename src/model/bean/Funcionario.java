@@ -19,6 +19,11 @@ public class Funcionario {
     public Button editar;
     public Button excluir;
 
+    public Funcionario(int codigo, String nome) {
+        this.codigo = codigo;
+        this.nome = nome;
+    }
+
     public Funcionario(int codigo, String nome, LocalDate dataCadastro) {
 //        this.buttons = new HBox();
 //        editar = new Button("Editar");

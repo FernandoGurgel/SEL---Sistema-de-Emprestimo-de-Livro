@@ -1,5 +1,6 @@
 package view;
 
+import connecton.ConnectonFactory;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,10 +19,16 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
+
+import static java.lang.System.out;
 
 public class TelaLoginController implements Initializable{
 
+    static String USUARIO;
+    static String SENHA;
 
     @FXML
     private Circle close;
@@ -78,7 +85,18 @@ public class TelaLoginController implements Initializable{
     }
 
     private void onvalidate() {
-        telaAdmin();
+
+        try {
+            USUARIO = login.getText().toString();
+            SENHA = senha.getText().toString();
+            Connection connection = new ConnectonFactory(login.getText().toString(),senha.getText().toString()).getConnection();
+            out.println("Conexao aberta!!");
+            connection.close();
+            telaAdmin();
+        } catch (SQLException e) {
+            mensagem("Usuario ou login invalido");
+            //out.println(e.getErrorCode());
+        }
     }
 
     private void mensagem(String mensagem) {

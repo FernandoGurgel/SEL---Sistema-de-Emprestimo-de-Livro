@@ -8,18 +8,21 @@ public class ConnectonFactory{
 
     private String usuario;
     private String senha;
-    private String url = "jdbc:mysql://localhost/";
-    private String banco;
+    private String url = "jdbc:mysql://localhost/sel_db";
+    private Connection connection;
+    private static ConnectonFactory connectonFactory;
 
-    public Connection getConnectionAdm(){
-        usuario = "SELadm";
-        senha = "admin";
-        banco = "teste";
+    public ConnectonFactory(String usuario, String senha){
+        this.usuario = usuario;
+        this.senha = senha;
+
         try {
-            return DriverManager.getConnection(url+banco,usuario,senha);
+            connection = DriverManager.getConnection(url,usuario,senha);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
     }
+
+    public Connection getConnection(){return connection;}
+
 }

@@ -42,7 +42,7 @@
                         <Reflection />
                      </effect>
                      <font>
-                        <Font name="Agency FB" size="13.0" />
+                        <Font size="16.0" />
                      </font>
                   </TextField>
                   <PasswordField fx:id="senha" onAction="#addEntrar" onKeyPressed="#onKeyboard" style="-fx-background-color: #FFFFFF;" visible="false" GridPane.rowIndex="1" />
