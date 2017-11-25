@@ -12,15 +12,12 @@ public class ConnectonFactory{
     private Connection connection;
     private static ConnectonFactory connectonFactory;
 
-    public ConnectonFactory(String usuario, String senha){
+    public ConnectonFactory(String usuario, String senha) throws SQLException {
         this.usuario = usuario;
         this.senha = senha;
 
-        try {
-            connection = DriverManager.getConnection(url,usuario,senha);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        connection = DriverManager.getConnection(url,usuario,senha);
+
     }
 
     public Connection getConnection(){return connection;}

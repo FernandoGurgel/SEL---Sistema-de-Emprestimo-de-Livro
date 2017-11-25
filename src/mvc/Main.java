@@ -22,7 +22,6 @@ public class Main extends Application{
         primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.setScene(new Scene(root));
         primaryStage.getIcons().add(new Image("view/Books.png"));
-
         primaryStage.show();
 
 
@@ -42,4 +41,14 @@ public class Main extends Application{
             }
         });
     }
+    
+//    public static void main(String[] args) {
+//		Main main = new Main();
+//		try {
+//			main.init();
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
 }

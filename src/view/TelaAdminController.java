@@ -33,6 +33,12 @@ import static view.TelaLoginController.USUARIO;
 public class TelaAdminController implements Initializable {
 
     @FXML
+    private Button btnEditar;
+    @FXML
+    private Pane paneUser;
+    @FXML
+    private Label labelUsuario;
+    @FXML
     private ComboBox<String> listTabela;
     @FXML
     private CheckBox update;
@@ -63,9 +69,13 @@ public class TelaAdminController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        connection =new ConnectonFactory(USUARIO,SENHA).getConnection();
-        loadFuncionario();
-        listComboBox();
+        try {
+            connection = new ConnectonFactory(USUARIO,SENHA).getConnection();
+            loadFuncionario();
+            listComboBox();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     private void mensagem(String mensagem) {

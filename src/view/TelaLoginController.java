@@ -73,7 +73,7 @@ public class TelaLoginController implements Initializable{
             senha.setVisible(true);
             btnEntrar.setText("Entrar");
         } else if (!senha.getText().equals("") && btnEntrar.getText().equals("Entrar")) {
-            btnEntrar.setDisable(true);
+            btnEntrar.setVisible(true);
             btnEntrar.setVisible(false);
             senha.setVisible(false);
             label.setTextAlignment(TextAlignment.CENTER);
@@ -95,7 +95,10 @@ public class TelaLoginController implements Initializable{
             telaAdmin();
         } catch (SQLException e) {
             mensagem("Usuario ou login invalido");
-            //out.println(e.getErrorCode());
+            label.setText("Login");
+            btnEntrar.setText("Próximo");
+            btnEntrar.setVisible(true);
+            login.setVisible(true);
         }
     }
 
