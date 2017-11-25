@@ -10,10 +10,13 @@ import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
 import model.bean.Funcionario;
 import model.bean.FuncionarioProperty;
 import sun.util.resources.LocaleData;
@@ -33,9 +36,27 @@ import static view.TelaLoginController.USUARIO;
 public class TelaAdminController implements Initializable {
 
     @FXML
-    private Button btnEditar;
+    private ImageView volta;
+    @FXML
+    private ImageView excluir;
+    @FXML
+    private ImageView salvar;
+    @FXML
+    private Pane panePerfil;
+    @FXML
+    private TextField txtNomePerfil;
+    @FXML
+    private TextField txtSenhaPerfil;
+    @FXML
+    private TextField txtConfirPerfil;
+    @FXML
+    private Button btnEditarUser;
+    @FXML
+    private Button btnNovoUsuario;
     @FXML
     private Pane paneUser;
+    @FXML
+    private Text labelPerfil;
     @FXML
     private Label labelUsuario;
     @FXML
@@ -58,6 +79,7 @@ public class TelaAdminController implements Initializable {
     private TableColumn<Funcionario,Integer> codigo;
     private Connection connection;
     private Funcionario usuarioSelecionado;
+    private ObservableList<Funcionario> properties;
 
 //    @FXML
 //    private TableColumn<Funcionario,Button> acoes;
@@ -114,11 +136,65 @@ public class TelaAdminController implements Initializable {
 
     @FXML
     private void onClickTable(MouseEvent event){
-        if (event.getClickCount() == 1 ) {
+        if (event.getSource().equals(btnEditarUser)){
+            telaPerfil(true);
+        }else if (event.getSource().equals(btnNovoUsuario)){
+            telaPerfil(false);
+        }else if (event.getClickCount() == 1 ) {
+            paneUser.setVisible(true);
             itemSelect(tabFuncionario.getSelectionModel().getSelectedItem(),false);
         }else if(event.getClickCount() == 2 ){
+            paneUser.setVisible(false);
             itemSelect(tabFuncionario.getSelectionModel().getSelectedItem(),true);
         }
+    }
+
+
+    private void telaPerfil(boolean b) {
+        panePerfil.setVisible(true);
+        // para editar
+        if (b){
+            labelPerfil.setText("Editar perfil");
+            txtNomePerfil.setDisable(true);
+        }// para Cadastrar
+        else{
+            labelPerfil.setText("Cadastra perfil");
+            txtNomePerfil.setDisable(false);
+        }
+    }
+
+    @FXML
+    private void OnAcionImg(){
+        if (volta.isPressed()){
+            panePerfil.setVisible(false);
+            txtNomePerfil.setText("");
+            txtSenhaPerfil.setText("");
+            txtConfirPerfil.setText("");
+        }else if(excluir.isPressed()){
+
+        }else if(salvar.isPressed()){
+            if (txtSenhaPerfil.getText().equals(txtConfirPerfil.getText())){
+                if (labelPerfil.getText().equals("Cadastra perfil")){
+                    String sql = "call sp_criauser('"+txtNomePerfil.getText()+"','"+txtSenhaPerfil.getText()+"')";
+                    try {
+                        PreparedStatement statement = connection.prepareStatement(sql);
+                        statement.execute();
+                        mensagem("Perfil cadastrado com sucesso");
+                        properties.add(new Funcionario(properties.size()+1,txtNomePerfil.getText()));
+                        panePerfil.setVisible(false);
+                        txtNomePerfil.setText("");
+                        txtSenhaPerfil.setText("");
+                        txtConfirPerfil.setText("");
+                    } catch (SQLException e) {
+                        mensagem("Perfil deu merda");
+                        e.printStackTrace();
+                    }
+                }
+            }else{
+                mensagem("Senha incorreta");
+            }
+        }
+
     }
 
     private void itemSelect(Funcionario selectedItem,boolean b) {
@@ -127,8 +203,13 @@ public class TelaAdminController implements Initializable {
         if (b){
             tabPrivilegio.setVisible(true);
         }else{
-
+            editarCliente();
         }
+    }
+
+    private void editarCliente() {
+        paneUser.setVisible(true);
+        labelUsuario.setText(usuarioSelecionado.getNome());
     }
 
     @FXML
@@ -155,7 +236,7 @@ public class TelaAdminController implements Initializable {
             e.printStackTrace();
         }
 
-        final ObservableList<Funcionario> properties = FXCollections.observableArrayList(listUsuario);
+        properties = FXCollections.observableArrayList(listUsuario);
 
         nome.setCellValueFactory(new PropertyValueFactory<>("nome"));
         codigo.setCellValueFactory(new PropertyValueFactory<>("codigo"));

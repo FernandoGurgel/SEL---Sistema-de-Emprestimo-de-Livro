@@ -13,6 +13,9 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -52,7 +55,7 @@
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="370.0" prefWidth="800.0">
                      <children>
                         <Separator layoutY="47.0" prefHeight="3.0" prefWidth="800.0" />
-                        <Button layoutX="633.0" layoutY="14.0" mnemonicParsing="false" text="NOVO FUNCIONARIO" AnchorPane.rightAnchor="16.0" />
+                        <Button fx:id="btnNovoUsuario" layoutX="633.0" layoutY="14.0" mnemonicParsing="false" onMousePressed="#onClickTable" text="NOVO FUNCIONARIO" AnchorPane.rightAnchor="16.0" />
                         <TableView fx:id="tabFuncionario" layoutY="50.0" onMouseClicked="#onClickTable" prefHeight="317.0" prefWidth="800.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                           <columns>
                             <TableColumn id="codigo" fx:id="codigo" editable="false" prefWidth="39.0" text="ID" />
@@ -139,9 +142,9 @@
             <ComboBox fx:id="listTabela" layoutX="203.0" layoutY="61.0" onAction="#viewPrivilegio" prefHeight="25.0" prefWidth="179.0" promptText="Selecione tabela" />
          </children>
       </Pane>
-      <Pane fx:id="paneUser" prefHeight="41.0" prefWidth="608.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="107.0">
+      <Pane fx:id="paneUser" prefHeight="41.0" prefWidth="608.0" visible="false" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="107.0">
          <children>
-            <Button layoutX="14.0" layoutY="8.0" mnemonicParsing="false" text="Editar" />
+            <Button fx:id="btnEditarUser" layoutX="14.0" layoutY="8.0" mnemonicParsing="false" onMousePressed="#onClickTable" text="Editar" />
             <Label fx:id="labelUsuario" layoutX="95.0" layoutY="9.0" prefHeight="24.0" prefWidth="464.0" text="Label">
                <font>
                   <Font name="Roboto Light" size="17.0" />
@@ -149,5 +152,64 @@
             </Label>
          </children>
       </Pane>
+       <Pane fx:id="panePerfil" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="224.0" prefWidth="375.0" style="-fx-background-color: #f3f3f3;" visible="false" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="150.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+           <children>
+               <Text layoutX="14.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Usuário">
+                   <font>
+                       <Font size="15.0" />
+                   </font>
+               </Text>
+               <TextField fx:id="txtNomePerfil" disable="true" layoutX="135.0" layoutY="64.0" prefHeight="25.0" prefWidth="177.0" promptText="Nome Usuario" />
+               <Text fx:id="labelPerfil" layoutX="12.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Editar perfil">
+                   <font>
+                       <Font size="23.0" />
+                   </font>
+               </Text>
+               <Separator layoutY="52.0" prefHeight="0.0" prefWidth="399.0" />
+               <Text layoutX="14.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Senha">
+                   <font>
+                       <Font size="15.0" />
+                   </font>
+               </Text>
+               <TextField fx:id="txtSenhaPerfil" layoutX="135.0" layoutY="100.0" prefHeight="25.0" prefWidth="177.0" promptText="Senha" />
+               <Text layoutX="14.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Confirmar Senha">
+                   <font>
+                       <Font size="15.0" />
+                   </font>
+               </Text>
+               <TextField fx:id="txtConfirPerfil" layoutX="135.0" layoutY="137.0" prefHeight="25.0" prefWidth="177.0" promptText="Confirma Senha" />
+               <ImageView fitHeight="25.0" fitWidth="34.0" layoutX="329.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true">
+                   <image>
+                       <Image url="@penson128.png" />
+                   </image>
+               </ImageView>
+               <ImageView fitHeight="25.0" fitWidth="34.0" layoutX="329.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
+                   <image>
+                       <Image url="@key.png" />
+                   </image>
+               </ImageView>
+               <ImageView fitHeight="25.0" fitWidth="34.0" layoutX="329.0" layoutY="137.0" pickOnBounds="true" preserveRatio="true">
+                   <image>
+                       <Image url="@key.png" />
+                   </image>
+               </ImageView>
+               <ImageView fx:id="salvar" accessibleText="Salvar" fitHeight="31.0" fitWidth="34.0" layoutX="24.0" layoutY="182.0" onMousePressed="#OnAcionImg" pickOnBounds="true" preserveRatio="true">
+                   <image>
+                       <Image url="@rotate.png" />
+                   </image>
+               </ImageView>
+               <ImageView fx:id="volta" accessibleText="Volta" fitHeight="25.0" fitWidth="25.0" layoutX="329.0" layoutY="19.0" onMousePressed="#OnAcionImg" pickOnBounds="true" preserveRatio="true">
+                   <image>
+                       <Image url="@left-arrow.png" />
+                   </image>
+               </ImageView>
+               <ImageView fx:id="excluir" accessibleText="Excluir" fitHeight="25.0" fitWidth="31.0" layoutX="329.0" layoutY="185.0" onMousePressed="#OnAcionImg" pickOnBounds="true" preserveRatio="true">
+                   <image>
+                       <Image url="@garbage.png" />
+                   </image>
+               </ImageView>
+           </children>
+       </Pane>
+
    </children>
 </AnchorPane>
